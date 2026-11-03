@@ -6,6 +6,7 @@ import java.util.Objects;
 public class Order{
     private LocalDateTime date;
     private  String company;
+
     private  int weightKg;
 
     public Order(LocalDateTime date, String company, int weight) {
@@ -52,5 +53,14 @@ public class Order{
     @Override
     public int hashCode() {
         return Objects.hash(date, company, weightKg);
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "date=" + date +
+                ", company='" + company + '\'' +
+                ", weightKg=" + weightKg +
+                '}';
     }
 }

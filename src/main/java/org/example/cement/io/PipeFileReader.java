@@ -1,0 +1,33 @@
+package org.example.cement.io;
+
+import org.example.cement.model.Order;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+public class PipeFileReader implements ReaderOrder{
+    public List<Order> readOrders(Path file) throws IOException {
+        List<Order> oreders = new ArrayList<>();
+        try (BufferedReader reader = Files.newBufferedReader(file)) {
+            String line;
+            while((line = reader.readLine()) != null) {
+                oreders.add(parseLine(line));
+            }
+        }
+        return oreders;
+    }
+
+    private Order parseLine(String line) {
+        String[] parts = line.split("\\|");
+        LocalDateTime date = LocalDateTime.parse(parts[0]);
+        String company = parts[1];
+        int weightKg = Integer.parseInt(parts[2]);
+        return new Order(date, company, weightKg);
+    }
+
+}
