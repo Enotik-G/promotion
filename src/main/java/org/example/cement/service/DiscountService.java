@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DiscountService implements CalcDiscount, SafeOrders {
+public class DiscountService implements CalcDiscount {
 
 
     @Override
@@ -40,22 +40,5 @@ public class DiscountService implements CalcDiscount, SafeOrders {
                 .multiply(BigDecimal.valueOf(pricePerKg))
                 .multiply(BigDecimal.valueOf(100 - discountPercent))
                 .divide(BigDecimal.valueOf(100));
-    }
-
-
-    @Override
-    public void safeFile(Map<String, BigDecimal> orders) {
-        String path = "src/main/java/org/example/cement/data/discountPriceForOrders/orders.txt";
-        try(BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
-            for (Map.Entry<String, BigDecimal> entry : orders.entrySet()) {
-                String line = entry.getKey() + " - " + entry.getValue();
-
-                bw.write(line);
-                bw.newLine();
-            }
-            System.out.println("Заказы успешно записаны в файл");
-        } catch (IOException e) {
-            System.err.println("Ошибка при записи в файл: " + e.getMessage());
-        } ;
     }
 }
