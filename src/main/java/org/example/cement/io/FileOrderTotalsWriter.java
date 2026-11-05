@@ -1,18 +1,16 @@
-package org.example.cement.service;
+package org.example.cement.io;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Parameter;
 import java.math.BigDecimal;
 import java.nio.file.Path;
 import java.util.Map;
 
-public class FileOrderTotalsWriter implements OrderTotalsWriter{
+public class FileOrderTotalsWriter implements OrderTotalsWriter {
 
     @Override
-    public void saveTotals(Map<String, BigDecimal> orders) {
-        Path path = Path.of("src/main/java/org/example/cement/data/discountPriceForOrders/orders.txt");
+    public void saveTotals(Map<String, BigDecimal> orders, Path path) {
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(path.toFile()))) {
             for (Map.Entry<String, BigDecimal> entry : orders.entrySet()) {
                 String line = entry.getKey() + " - " + entry.getValue().toPlainString();
