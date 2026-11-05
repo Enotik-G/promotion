@@ -12,14 +12,14 @@ import java.util.List;
 
 public class PipeFileReader implements ReaderOrder{
     public List<Order> readOrders(Path file) throws IOException {
-        List<Order> oreders = new ArrayList<>();
+        List<Order> orders = new ArrayList<>();
         try (BufferedReader reader = Files.newBufferedReader(file)) {
             String line;
             while((line = reader.readLine()) != null) {
-                oreders.add(parseLine(line));
+                orders.add(parseLine(line));
             }
         }
-        return oreders;
+        return orders;
     }
 
     private Order parseLine(String line) {

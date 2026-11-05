@@ -6,6 +6,8 @@ import org.example.cement.model.Order;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderReaderAdapter implements ReaderOrder {
@@ -16,7 +18,12 @@ public class OrderReaderAdapter implements ReaderOrder {
     }
     @Override
     public List<Order> readOrders(Path file) throws IOException {
-        List<String> orders =  delimitedFileReader.readFile(file);
+        List<String[]> lines =  delimitedFileReader.readFile(file);
+        List<Order> orders = new ArrayList<>();
 
+        for (String[] line : lines) {
+            orders.add(new Order(LocalDateTime.parse(line[0]), line[1], Integer.parseInt(line[2])));
+        }
+        return orders;
     }
 }

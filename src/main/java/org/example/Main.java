@@ -1,6 +1,8 @@
 package org.example;
 
+import java.io.IOException;
+
 public class Main {
-    static void main() {
+    static void main() throws IOException {
     }
 }
