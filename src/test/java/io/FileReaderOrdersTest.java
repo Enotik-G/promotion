@@ -32,4 +32,18 @@ public class FileReaderOrdersTest {
         Assertions.assertEquals(List.of(expected), actual);
     }
 
+    @Test
+    void readOrdersFromEmptyFile() throws IOException {
+        Path file = Files.createFile(tempDir.resolve("orders.txt"));
+        List<Order> res = new PipeFileReader().readOrders(file);
+
+        Assertions.assertTrue(res.isEmpty());
+    }
+
+    @Test
+    void readOrdersNoSuchDirectory() throws IOException {
+        Path file = tempDir.resolve("mistake.txt");
+        Assertions.assertThrows(IOException.class, () -> new PipeFileReader().readOrders(file));
+    }
+
 }
