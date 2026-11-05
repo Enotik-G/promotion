@@ -10,10 +10,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderReaderAdapter implements ReaderOrder {
+public class DelimitedFileReaderAdapter implements ReaderOrder {
     private final DelimitedFileReader delimitedFileReader;
 
-    public OrderReaderAdapter(DelimitedFileReader delimitedFileReader) {
+    public DelimitedFileReaderAdapter(DelimitedFileReader delimitedFileReader) {
         this.delimitedFileReader = delimitedFileReader;
     }
     @Override

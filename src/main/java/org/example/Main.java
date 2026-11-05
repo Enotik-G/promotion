@@ -3,7 +3,7 @@ package org.example;
 import org.example.cement.io.PipeFileReader;
 import org.example.cement.model.Order;
 import org.example.cement.service.DiscountService;
-import org.example.cement.service.FileOrderTotalsWriter;
+import org.example.cement.io.FileOrderTotalsWriter;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -21,7 +21,7 @@ public class Main {
         List<Order> orders = pr.readOrders(Path.of("src/main/java/org/example/cement/data/orders/discount_day.txt"));
         System.out.println(orders);
         Map<String, BigDecimal> res = ds.ordersWithDiscount(orders);
-        fotw.saveTotals(res);
+        fotw.saveTotals(res, Path.of("src/main/java/org/example/cement/data/discountPriceForOrders"));
         System.out.println(res);
     }
 }
