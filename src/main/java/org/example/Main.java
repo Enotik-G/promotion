@@ -1,17 +1,25 @@
 package org.example;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    static void main() {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        IO.println(String.format("Hello and welcome!"));
+import org.example.cement.io.PipeFileReader;
+import org.example.cement.model.Order;
+import org.example.cement.service.DiscountService;
+import org.example.cement.io.FileOrderTotalsWriter;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            IO.println("i = " + i);
-        }
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.nio.file.Path;
+import java.util.List;
+import java.util.Map;
+
+public class Main {
+    static void main() throws IOException {
+        PipeFileReader pr = new PipeFileReader();
+        DiscountService ds = new DiscountService();
+        FileOrderTotalsWriter fotw = new FileOrderTotalsWriter();
+        List<Order> orders = pr.readOrders(Path.of("src/main/java/org/example/cement/data/orders/discount_day.txt"));
+        System.out.println(orders);
+        Map<String, BigDecimal> res = ds.ordersWithDiscount(orders);
+        fotw.saveTotals(res, Path.of("src/main/java/org/example/cement/data/discountPriceForOrders"));
+        System.out.println(res);
     }
 }
