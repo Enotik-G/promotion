@@ -32,4 +32,22 @@ public class CalcDiscountOrdersTest {
 
         Assertions.assertEquals(expected, actual);
     }
+
+    @Test
+    void zeroDiscountTest() {
+        List<Order> orders = new ArrayList<>();
+        LocalDateTime start = LocalDateTime.of(2021, 2, 9, 10, 0);
+
+        for (int i = 0; i < 12; i++) {
+            orders.add(new Order(start.plusMinutes(i), "Pyramid", 1));
+        }
+
+        Map<String, BigDecimal> expected =
+                Map.of("Pyramid", BigDecimal.valueOf(18500));
+
+        Map<String, BigDecimal> actual =
+                new DiscountService().ordersWithDiscount(orders);
+
+        Assertions.assertEquals(expected, actual);
+    }
 }
