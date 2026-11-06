@@ -8,12 +8,13 @@ import java.nio.file.Path;
 import java.util.Map;
 
 public class FileOrderTotalsWriter implements OrderTotalsWriter {
+    private static final String OUTPUT_SEPARATOR = " - ";
 
     @Override
     public void saveTotals(Map<String, BigDecimal> orders, Path path) {
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(path.toFile()))) {
             for (Map.Entry<String, BigDecimal> entry : orders.entrySet()) {
-                String line = entry.getKey() + " - " + entry.getValue().toPlainString();
+                String line = entry.getKey() + OUTPUT_SEPARATOR + entry.getValue().toPlainString();
                 bw.write(line);
                 bw.newLine();
             }
