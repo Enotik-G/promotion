@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PipeFileReader implements ReaderOrder{
+    String SEPARATOR = "\\|";
+
     public List<Order> readOrders(Path file) throws IOException {
         List<Order> orders = new ArrayList<>();
         try (BufferedReader reader = Files.newBufferedReader(file)) {
@@ -23,7 +25,12 @@ public class PipeFileReader implements ReaderOrder{
     }
 
     private Order parseLine(String line) {
-        String[] parts = line.split("\\|");
+        String[] parts = line.split(SEPARATOR);
+
+        if(parts.length != 3) {
+            throw new IllegalArgumentException("Ожидалось 3 поля, полученый length: " + parts.length);
+        }
+
         LocalDateTime date = LocalDateTime.parse(parts[0]);
         String company = parts[1];
         int weightKg = Integer.parseInt(parts[2]);
