@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PipeFileReader implements ReaderOrder{
-    String SEPARATOR = "\\|";
+    private static final String SEPARATOR = "\\|";
 
     public List<Order> readOrders(Path file) throws IOException {
         List<Order> orders = new ArrayList<>();
