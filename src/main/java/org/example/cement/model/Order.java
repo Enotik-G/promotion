@@ -3,11 +3,11 @@ package org.example.cement.model;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class Order{
+public class Order {
     private LocalDateTime date;
-    private  String company;
+    private String company;
 
-    private  int weightKg;
+    private int weightKg;
 
     public Order(LocalDateTime date, String company, int weight) {
         this.date = date;
@@ -15,7 +15,7 @@ public class Order{
         this.weightKg = weight;
     }
 
-    public LocalDateTime getDate(){
+    public LocalDateTime getDate() {
         return this.date;
     }
 
@@ -41,10 +41,10 @@ public class Order{
 
     @Override
     public boolean equals(Object o) {
-        if(this == o) return true;
-        if(o == null ||  getClass() != o.getClass()) return false;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
-        Order other =  (Order) o;
+        Order other = (Order) o;
         return other.getDate().equals(this.date) &&
                 other.getCompany().equals(this.company) &&
                 other.getWeightKg() == this.weightKg;

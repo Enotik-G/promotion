@@ -2,7 +2,6 @@ package io;
 
 import org.example.cement.adapter.DelimitedFileReaderAdapter;
 import org.example.cement.io.DelimitedFileReader;
-import org.example.cement.io.PipeFileReader;
 import org.example.cement.model.Order;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -22,7 +21,7 @@ public class DelimitedFileReaderAdapterTest {
     @Test
     void readOrderFromFileWithSeparatorHash() throws IOException {
         Path file = tempDir.resolve("sharpSeparator.txt");
-        Files.writeString(file,"2021-02-09T09:11:43#Pyramid#10100");
+        Files.writeString(file, "2021-02-09T09:11:43#Pyramid#10100");
 
         List<Order> actual = new DelimitedFileReaderAdapter(new DelimitedFileReader()).readOrders(file);
 
@@ -32,7 +31,7 @@ public class DelimitedFileReaderAdapterTest {
     }
 
     @Test
-    void readOrdersAdapterFromEmptyFile () throws IOException {
+    void readOrdersAdapterFromEmptyFile() throws IOException {
         Path file = Files.createFile(tempDir.resolve("orders.txt"));
         List<Order> res = new DelimitedFileReaderAdapter(new DelimitedFileReader()).readOrders(file);
         Assertions.assertTrue(res.isEmpty());
@@ -43,7 +42,6 @@ public class DelimitedFileReaderAdapterTest {
         Path file = tempDir.resolve("mistake.txt");
         Assertions.assertThrows(IOException.class, () -> new DelimitedFileReaderAdapter(new DelimitedFileReader()).readOrders(file));
     }
-
 
 
 }

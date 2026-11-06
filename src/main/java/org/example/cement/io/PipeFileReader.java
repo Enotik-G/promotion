@@ -10,14 +10,14 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PipeFileReader implements ReaderOrder{
+public class PipeFileReader implements ReaderOrder {
     private static final String SEPARATOR = "\\|";
 
     public List<Order> readOrders(Path file) throws IOException {
         List<Order> orders = new ArrayList<>();
         try (BufferedReader reader = Files.newBufferedReader(file)) {
             String line;
-            while((line = reader.readLine()) != null) {
+            while ((line = reader.readLine()) != null) {
                 orders.add(parseLine(line));
             }
         }
@@ -27,7 +27,7 @@ public class PipeFileReader implements ReaderOrder{
     private Order parseLine(String line) {
         String[] parts = line.split(SEPARATOR);
 
-        if(parts.length != 3) {
+        if (parts.length != 3) {
             throw new IllegalArgumentException("Ожидалось 3 поля, полученый length: " + parts.length);
         }
 

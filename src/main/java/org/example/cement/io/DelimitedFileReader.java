@@ -12,9 +12,9 @@ public class DelimitedFileReader {
 
     public List<String[]> readFile(Path file) throws IOException {
         List<String[]> lineOrders = new ArrayList<>();
-        try(BufferedReader br = Files.newBufferedReader(file) ) {
+        try (BufferedReader br = Files.newBufferedReader(file)) {
             String line;
-            while((line = br.readLine()) != null) {
+            while ((line = br.readLine()) != null) {
                 String[] parts = line.split(SEPARATOR);
                 lineOrders.add(parts);
             }
