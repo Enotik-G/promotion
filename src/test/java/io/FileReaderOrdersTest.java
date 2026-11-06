@@ -36,7 +36,6 @@ public class FileReaderOrdersTest {
     void readOrdersFromEmptyFile() throws IOException {
         Path file = Files.createFile(tempDir.resolve("orders.txt"));
         List<Order> res = new PipeFileReader().readOrders(file);
-
         Assertions.assertTrue(res.isEmpty());
     }
 
